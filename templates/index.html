@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>..:: Search Movies ::..</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='reset.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <div >
+      <a href="{{ url_for('index') }}">
+        <img class="logo_top" src="{{ url_for('static', filename='logo_film.png') }}"></a>
+    </div>
+    <main class="main_index">
+      <form action="{{ url_for('search') }}" method="post" enctype="multipart/form-data">
+        <fieldset>
+
+        <ul class="form-style-1">
+            <h1>Type a Movie, Series, Game or Live concert</h1>
+            <li><input type="text" id="name" name="name" class='field-long'>
+              <button type="submit">&#128269;</button></li>
+        </ul>
+        </fieldset>
+      </form>
+      <div class="flash">
+        {% for category, message in get_flashed_messages(with_categories=True) %}
+        {{ message }}
+        {% endfor %}
+      </div>
+      <h2>This site uses OMDb API<br>The OMDb API is a RESTful web service to obtain movie information</h2>
+    </main>
+  </body>
+</html>

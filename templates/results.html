@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+    <main class="main_results">
+      <h1>Results for: "{{ keyword }}" </h1><br>
+
+        {% for l in range(list.data | length) %}
+          <table class="results_table">
+              <tr>
+                  {% if list.data[l]['Poster'] == "N/A" %}
+                      <td rowspan="5" class="td_poster"><img class="poster" src="{{ url_for('static',filename='No-Image-Available.png') }}"></td>
+                  {% else %}
+                      <td rowspan="5" class="td_poster"><img class="poster" src="{{ list.data[l]['Poster'] }}"></td>
+                  {% endif %}
+              <td></td>
+              </tr>
+              <tr>
+                <td class="td_titles">Title</td>
+                <td>{{ list.data[l]['Title'] }}</td>
+              </tr>
+              <tr>
+                <td class="td_titles">Year</td>
+                <td>{{ list.data[l]['Year'] }}</td>
+              </tr>
+              <tr>
+                <td class="td_titles">Type</td>
+                <td>{{ list.data[l]['Type'] }}</td>
+              </tr>
+              <tr>
+                <td colspan="2" class="td__moredetails">
+                    <a class="button_more_details" href="{{ url_for('more_details', imdbid=list.data[l]['imdbID']) }}">More details</a></td>
+              </tr>
+          </table>
+        {% endfor %}
+    </main>
+{% endblock %}

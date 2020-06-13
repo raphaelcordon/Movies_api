@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>..:: Search Movies ::..</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='reset.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <header>
+        <a href="{{ url_for('index') }}">
+        <img class="logo_top" src="{{ url_for('static', filename='logo_film.png') }}"></a>
+
+        <form action="{{ url_for('search') }}" method="post" enctype="multipart/form-data">
+          <fieldset>
+
+          <ul class="form-style-1">
+              <li class="form-style-results"><input type="text" id="name" name="name" class='field-long'>
+                <button type="submit">&#128269;</button></li>
+          </ul>
+          </fieldset>
+        </form>
+
+            {% block content %} {% endblock %}
+
+    </header>
+    <div class="flash">
+      {% for category, message in get_flashed_messages(with_categories=True) %}
+      {{ message }}
+      {% endfor %}
+    </div>
+    {% extends 'footer.html' %}
+    </body>
+</html>

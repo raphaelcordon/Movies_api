@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% block content %}
+<form class="button_location">
+  <input class="button" type="button" value="Go back" onclick="history.back()">
+</form>
+    <main class="main_results">
+        <section class="poster_more_details">
+          <div class="poster_image">
+            {% if list['Poster'] == "N/A" %}
+              <img src="{{ url_for('static',filename='No-Image-Available.png') }}">
+            {% else %}
+              <img src="{{ list['Poster'] }}">
+            {% endif %}
+          </div>
+          <table class="table_poster">
+              <tr>
+              <td></td>
+              <td></td>
+            </tr>
+              <tr>
+                <td class="more_details_titles">Title</td>
+                <td>{{ list['Title'] }}</td>
+              </tr>
+              <tr>
+                <td class="more_details_titles">Year</td>
+                <td>{{ list['Year'] }}</td>
+              </tr>
+              <tr>
+                <td class="more_details_titles">Type</td>
+                <td>{{ list['Type'] }}</td>
+              </tr>
+              <tr>
+                <td class="more_details_titles">Released</td>
+                <td>{{ list['Released'] }}</td>
+              </tr>
+              <tr>
+                <td class="more_details_titles">Runtime</td>
+                <td>{{ list['Runtime'] }}</td>
+              </tr>
+            <tr>
+                <td class="more_details_titles">Genre</td>
+                <td>{{ list['Genre'] }}</td>
+              </tr>
+              <tr>
+                <td class="more_details_titles">Director</td>
+                <td>{{ list['Director'] }}</td>
+              </tr>
+              <tr>
+                <td class="more_details_titles">Writer</td>
+                <td>{{ list['Writer'] }}</td>
+              </tr>
+              <tr>
+                <td class="more_details_titles">Actors</td>
+                <td>{{ list['Actors'] }}</td>
+              </tr>
+              <tr>
+                <td class="more_details_titles">Language</td>
+                <td>{{ list['Language'] }}</td>
+              </tr>
+              <tr>
+                <td class="more_details_titles">Country</td>
+                <td>{{ list['Country'] }}</td>
+              </tr>
+              <tr>
+                <td class="more_details_titles">Awards</td>
+                <td>{{ list['Awards'] }}</td>
+              </tr>
+          </table>
+        </section>
+        <div style="clear: both">
+          <table>
+              <tr>
+                <td class="table_plot">Plot</td>
+                <td class="plot">{{ list['Plot'] }}</td>
+              </tr>
+              <tr>
+          </table>
+        </div>
+
+            <p class="ratings_title">Ratings:</p>
+
+                <table class="ratings_table">
+                  <tr>
+                      <td class="ratings_table_head">IMDB</td>
+                      <td class="ratings_table_head">Votes</td>
+                  </tr>
+                  <tr>
+                      <td>{{ list['imdbRating'] }}</td>
+                      <td>{{ list['imdbVotes'] }}</td>
+                  </tr>
+                </table>
+                <table class="ratings_table">
+                  {% for v in range(list['Ratings'] | length) %}
+                  <tr>
+                      <td class="ratings_table_head">{{ list['Ratings'][v]['Source'] }}</td>
+                  </tr>
+                  <tr>
+                    <td>{{ list['Ratings'][v]['Value'] }}</td>
+                </tr>
+                  {% endfor %}
+                </table>
+              <br>
+    </main>
+{% endblock %}
