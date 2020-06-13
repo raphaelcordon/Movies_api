@@ -21,6 +21,13 @@ def search():
     else:
         movie = request.form['name']
         list = SearchMovie(movie)
+
+        try:
+            if list.data['Response']:
+                flash("No results found, try another name", 'error')
+                return redirect(url_for('index'))
+        except:
+            pass
     return render_template('results.html', list=list, keyword=movie)
 
 
@@ -33,11 +40,7 @@ def more_details(imdbid):
 class SearchMovie:
     def __init__(self, movie):
         movie = str(re.sub(' ', '+', movie)).lower().strip()
-        if self.get_movie(movie):
-            self.movie = movie
-        else:
-            flash('Invalid Name', 'error')
-            raise ValueError('Invalid Name')
+        self.get_movie(movie)
 
     def get_movie(self, movie):
         data = f'http://www.omdbapi.com/?s={movie}&apikey={API_Key.API_key}'
@@ -46,7 +49,8 @@ class SearchMovie:
         # Convert bytes to string type and string type to dict
         string = response.read().decode('utf-8')
         self.data = json.loads(string)
-        self.data = self.data['Search']
+        if self.data['Response'] == "True":
+            self.data = self.data['Search']
         return self.data
 
 
@@ -61,4 +65,4 @@ def get_full_description(imdbid):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()

@@ -185,15 +185,7 @@ tbody {
     position:relative;
     left: 10%;
     }
-    @keyframes bouncy {
-    0%{top:0em}
-    40%{top:0em}
-    43%{top:-0.9em}
-    46%{top:0em}
-    48%{top:-0.4em}
-    50%{top:0em}
-    100%{top:0em;}
-    }
+
 
 .button_more_details:hover{
     border-color:#DDDDDD;
@@ -352,8 +344,9 @@ footer {
     }
 
     .button_more_details{
-        margin:0.4em 0.2em;
+        margin:0.2em 0.2em;
         padding:0.2em 0.2em;
-        left: 25%
+        font-size: -2em;
+        left: 25%;
     }
 }
